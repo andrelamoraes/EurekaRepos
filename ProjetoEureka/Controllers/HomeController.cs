@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProjetoEureka.Data;
 using ProjetoEureka.Models;
 
 namespace ProjetoEureka.Controllers
@@ -12,14 +13,18 @@ namespace ProjetoEureka.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Context _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Context context)
         {
+            _context = context;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            ViewBag.ListaNoticia = _context.euk_noticia.ToList();
+
             return View();
         }
 
