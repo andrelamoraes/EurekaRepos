@@ -1,12 +1,14 @@
 ﻿@using ProjetoEureka.Models;
- 
+@model ProjetoEureka.Models.Noticia;
 
 @{
+    
     var noticias = new List<Noticia>();
     noticias = ViewBag.ListaNoticia;
 
        ViewData["Title"] = "Home Page";
 } 
+@Model
     <div class="section">
         <div class="container">
             <div class="row">
@@ -48,8 +50,8 @@
                                     <div class="card">
                                         <img class="card-img-top" src="http://eurekanimes.net/modules/mod_news_pro_gk5/cache/noticias.ni_no_kuni_filmensp-139.jpg" alt="Card image cap">
                                         <div class="card-body">
-                                            <h5 class="card-title">@Html.ActionLink(item.Titulo, "Index", "Noticia", new { id = item.Id , titulo = item.Titulo})</h5>
-                                            <small class="text-muted">Categoria: @item.Categoria.Nome | @item.Data_criacao | Acessos: 200</small>
+                                            <h5 class="card-title">@Html.ActionLink(item.Titulo, "Index", "Noticia", new { id = item.Id, titulo = item.Titulo})</h5>
+                                            <small class="text-muted">Categoria: @item._Categoria.Nome | @item.Data_Criacao | Acessos: 200</small>
                                             <p class="card-text">@item.Descricao</p>
                                         </div>
                                     </div>

@@ -23,7 +23,16 @@ namespace ProjetoEureka.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.ListaNoticia = _context.euk_noticia.ToList();
+            try
+            {
+                ViewBag.ListaNoticia = _context.euk_noticia.ToList();
+                ViewBag.ListaCategoria = _context.euk_categoria.ToList();
+            }
+            catch (Exception e)
+            {
+
+            }
+
 
             return View();
         }

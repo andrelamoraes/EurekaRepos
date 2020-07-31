@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace ProjetoEureka.Models
 {
-    [Table("euk_categoria")]
+    [Table("euk_categoria", Schema = "eureka_animes")]
     public class Categoria
     {
         [Key]
-        public int Id { get; set; }
+        public int Cat_Id { get; set; }
+        [Column("Categoria")]
         public string Nome { get; set; }
+        public virtual ICollection<Noticia> Noticias { get; set; }
+
     }
 }
