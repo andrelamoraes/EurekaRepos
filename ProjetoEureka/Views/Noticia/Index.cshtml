@@ -1,0 +1,36 @@
+﻿@model ProjetoEureka.Models.Noticia;
+@{
+    ViewData["Title"] = "Eureka Animes - " + Model.Titulo;
+}
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9 correct">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="c-blog__heading style-2 font-heading">
+                            <h2>
+                                <i class="ion-ios-bookmark"></i>
+                                @Model.Titulo
+                            </h2>
+                        </div>
+                        <small class="text-muted"><i class="ion-ios-news"></i>Escrito por | Categoria: Cat | @Model.Data_criacao | Acessos: 200</small>
+                        <p>@Model.Descricao</p>
+                    </div>
+                </div>
+            </div>
+            <!--Separador de conteudo-->
+            <div class="col-lg-3 correct">
+                <h5 class="widget-heading">Teste</h5>
+
+                <h5 class="widget-heading">Temporada Atual</h5>
+
+                <h5 class="widget-heading">Facebook</h5>
+
+                <h5 class="widget-heading">Parceiros</h5>
+            </div>
+        </div>
+    </div>
+</div>

@@ -82,14 +82,20 @@ ul.nav.menu li a:hover {
 .marginicone::before {
     margin-right: 10px;
 }
+.titulos > a {
+    font-family: 'Montserrat', sans-serif;
+    color: #073133 !important;
+}
 .card:hover {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 .correct {
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 4px;
 }
-
+.correct-text {
+    padding-bottom: 4px;
+}
 .eureka-box{
     width: 100%;
     height:400px;
@@ -104,7 +110,7 @@ ul.nav.menu li a:hover {
 }
 
 .footer {
-    position: relative;
+    position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
@@ -201,3 +207,18 @@ ul.nav.menu li a:hover {
     top: 100%;
     left: 15px;
 }
+
+/*Zoom imagem on hover*/
+.card-my-image{
+    overflow:hidden;
+}
+    .card-my-image img {
+        transition: transform 2s, filter 1.5s ease-in-out;
+        transform-origin: center center;
+        filter: brightness(50%);
+    }
+
+    .card-my-image:hover img {
+        filter: brightness(100%);
+        transform: scale(1.3);
+    }
