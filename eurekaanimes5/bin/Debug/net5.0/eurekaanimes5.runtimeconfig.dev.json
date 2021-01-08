@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Wakari\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Wakari\\.nuget\\packages"
+    ]
+  }
+}
