@@ -10,6 +10,6 @@ namespace eurekaanimes5.Models
         public int TagID { get; set; }
         public string TagName { get; set; }
         public ICollection<Animes> Anime { get; set; }
-
+        public ICollection<Noticias> Noticia { get; set; }
     }
 }

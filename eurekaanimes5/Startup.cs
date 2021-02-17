@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using eurekaanimes5.Interfaces;
+using eurekaanimes5.Services;
 
 namespace eurekaanimes5
 {
@@ -36,14 +38,10 @@ namespace eurekaanimes5
             services.AddDbContext<Context>(opt =>
             opt
                     .UseMySql(
-                       // Replace with your connection string.
                        Configuration.GetConnectionString("DefaultConnection"),
-                        // Replace with your server version and type.
-                        // For common usages, see pull request #1233.
-                        new MySqlServerVersion(new Version(8, 0, 21)), // use MariaDbServerVersion for MariaDB
+                        new MySqlServerVersion(new Version(8, 0, 21)),
                         mySqlOptions => mySqlOptions
                             .CharSetBehavior(CharSetBehavior.NeverAppend))
-                    // Everything from this point on is optional but helps with debugging.
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors()
             );
@@ -51,9 +49,9 @@ namespace eurekaanimes5
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eurekaanimes5", Version = "v1" });
             });
-        }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            services.AddScoped<IAnimeService, AnimeService>();
+        }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 

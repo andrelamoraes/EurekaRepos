@@ -1288,26 +1288,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\eduar\\.nuget\\packages\\": {}
+    "C:\\Users\\Wakari\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\eduar\\Documents\\EurekaRepos\\eurekaanimes5\\eurekaanimes5.csproj",
+      "projectUniqueName": "C:\\Repositorio\\EurekaRepos\\eurekaanimes5\\eurekaanimes5.csproj",
       "projectName": "eurekaanimes5",
-      "projectPath": "C:\\Users\\eduar\\Documents\\EurekaRepos\\eurekaanimes5\\eurekaanimes5.csproj",
-      "packagesPath": "C:\\Users\\eduar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\eduar\\Documents\\EurekaRepos\\eurekaanimes5\\obj\\",
+      "projectPath": "C:\\Repositorio\\EurekaRepos\\eurekaanimes5\\eurekaanimes5.csproj",
+      "packagesPath": "C:\\Users\\Wakari\\.nuget\\packages\\",
+      "outputPath": "C:\\Repositorio\\EurekaRepos\\eurekaanimes5\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\eduar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Wakari\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1381,7 +1379,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

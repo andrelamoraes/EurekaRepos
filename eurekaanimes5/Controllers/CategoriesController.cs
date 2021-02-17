@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using eurekaanimes5.Data;
@@ -29,13 +30,21 @@ namespace eurekaanimes5.Controllers
             [FromBody] Categories category
         )
         {
-            if (!ModelState.IsValid)
-                return BadRequest(new { message = "Não foi possível adicionar a categoria." });
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(new { message = "Não foi possível adicionar a categoria." });
 
-            context.Categories.Add(category);
-            await context.SaveChangesAsync();
+                context.Categories.Add(category);
+                await context.SaveChangesAsync();
 
-            return Ok(category);
+                return Ok(category);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
         }
 
         [HttpPut]

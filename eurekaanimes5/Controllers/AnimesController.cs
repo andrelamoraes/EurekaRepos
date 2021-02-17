@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using eurekaanimes5.Data;
+using eurekaanimes5.Interfaces;
 using eurekaanimes5.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,28 +12,85 @@ namespace eurekaanimes5.Controllers
     [Route("animes")]
     public class AnimesController : Controller
     {
-        [HttpGet]
-        public async Task<ActionResult<List<Animes>>> Get([FromServices] Context context)
+        private Context _context;
+        private IAnimeService _animeservice;
+        public AnimesController(IAnimeService animeservice)
         {
-            var list = await context
-            .Animes
-            .Include(x => x.Category)
-            .AsNoTracking()
-            .ToListAsync();
-
-            return list;
+            _animeservice = animeservice;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Animes>> Post([FromServices] Context context, [FromBody] Animes anime)
+        [HttpGet("[action]")]
+        public async Task<ActionResult<List<Animes>>> Get()
+        {
+            try
+            {
+                return _animeservice.listaranimes();
+            }
+            catch (System.Exception e)
+            {
+                return StatusCode(500, $"Não foi possível listar os animes {e.Message}");
+            }
+
+        }
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult<List<Animes>>> GetById(int AnimeID)
+        {
+            try
+            {
+                return _animeservice.listarpeloid(AnimeID);
+            }
+            catch (System.Exception e)
+            {
+                return StatusCode(500, $"Não foi possível listar os animes {e.Message}");
+            }
+
+        }
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult<List<Animes>>> GetByCategory(int CategoriaID)
+        {
+            try
+            {
+                return _animeservice.listarcategoria(CategoriaID);
+            }
+            catch (System.Exception e)
+            {
+                return StatusCode(500, $"Não foi possível listar os animes {e.Message}");
+            }
+
+        }
+
+        [HttpPost("[action]")]
+        public async Task<ActionResult<Animes>> Post([FromBody] Animes anime)
         {
             if (!ModelState.IsValid)
                 return BadRequest(new { message = "Erro ao cadastrar anime;" });
 
-            context.Animes.Add(anime);
-            await context.SaveChangesAsync();
+            try
+            {
+                _animeservice.cadastrar(anime);
+                return Ok(anime);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Erro ao cadastrar o anime");
+            }
 
-            return Ok(anime);
+        }
+
+        [HttpDelete("[action]")]
+        public async Task<ActionResult<Animes>> Delete(int AnimeID)
+        {
+            try
+            {
+                _animeservice.Deletar(AnimeID);
+                return Ok();
+            }
+            catch (System.Exception e)
+            {
+                return StatusCode(500, "Erro ao deletar o anime");
+            }
         }
     }
 }

@@ -13,7 +13,6 @@ namespace eurekaanimes5.Models
         public int UserID { get; set; }
         public int CategoryID { get; set; }
         public Categories Category { get; set; }
-        public ICollection<Tags> Tags { get; set; }
 
     }
 }

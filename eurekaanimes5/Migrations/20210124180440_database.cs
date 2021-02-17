@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eurekaanimes5.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,19 @@ namespace eurekaanimes5.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CatID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    TagID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    TagName = table.Column<string>(type: "longtext", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.TagID);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,6 +107,30 @@ namespace eurekaanimes5.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AnimesTags",
+                columns: table => new
+                {
+                    AnimeID = table.Column<int>(type: "int", nullable: false),
+                    TagsTagID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnimesTags", x => new { x.AnimeID, x.TagsTagID });
+                    table.ForeignKey(
+                        name: "FK_AnimesTags_Animes_AnimeID",
+                        column: x => x.AnimeID,
+                        principalTable: "Animes",
+                        principalColumn: "AnimeID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AnimesTags_Tags_TagsTagID",
+                        column: x => x.TagsTagID,
+                        principalTable: "Tags",
+                        principalColumn: "TagID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Characters",
                 columns: table => new
                 {
@@ -115,43 +152,23 @@ namespace eurekaanimes5.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tags",
+                name: "NoticiasTags",
                 columns: table => new
                 {
-                    TagID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TagName = table.Column<string>(type: "longtext", nullable: true),
-                    NoticiasNewsID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.TagID);
-                    table.ForeignKey(
-                        name: "FK_Tags_News_NoticiasNewsID",
-                        column: x => x.NoticiasNewsID,
-                        principalTable: "News",
-                        principalColumn: "NewsID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AnimesTags",
-                columns: table => new
-                {
-                    AnimeID = table.Column<int>(type: "int", nullable: false),
+                    NoticiaNewsID = table.Column<int>(type: "int", nullable: false),
                     TagsTagID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnimesTags", x => new { x.AnimeID, x.TagsTagID });
+                    table.PrimaryKey("PK_NoticiasTags", x => new { x.NoticiaNewsID, x.TagsTagID });
                     table.ForeignKey(
-                        name: "FK_AnimesTags_Animes_AnimeID",
-                        column: x => x.AnimeID,
-                        principalTable: "Animes",
-                        principalColumn: "AnimeID",
+                        name: "FK_NoticiasTags_News_NoticiaNewsID",
+                        column: x => x.NoticiaNewsID,
+                        principalTable: "News",
+                        principalColumn: "NewsID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AnimesTags_Tags_TagsTagID",
+                        name: "FK_NoticiasTags_Tags_TagsTagID",
                         column: x => x.TagsTagID,
                         principalTable: "Tags",
                         principalColumn: "TagID",
@@ -179,9 +196,9 @@ namespace eurekaanimes5.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tags_NoticiasNewsID",
-                table: "Tags",
-                column: "NoticiasNewsID");
+                name: "IX_NoticiasTags_TagsTagID",
+                table: "NoticiasTags",
+                column: "TagsTagID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -193,16 +210,19 @@ namespace eurekaanimes5.Migrations
                 name: "Characters");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "NoticiasTags");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Animes");
 
             migrationBuilder.DropTable(
                 name: "News");
+
+            migrationBuilder.DropTable(
+                name: "Tags");
 
             migrationBuilder.DropTable(
                 name: "Categories");
